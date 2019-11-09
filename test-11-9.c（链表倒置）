@@ -1,0 +1,172 @@
+#define _CRT_SECURE_NO_WARNINGS 1
+#include<stdio.h>
+typedef struct Node {
+	int val;
+	struct Node* next;
+}Node;
+//1.链表倒置
+//2.C1:1->2->4,C2:1->2->3 输出：1->1->2->2->3->4,链表合并选择小的尾插后输出
+//3.判断链表是否为回文结构？
+//4.寻找链表的相交节点？
+Node* ReverseList(Node*head){
+	Node* rhead = NULL;
+	Node* cur = head;
+	Node* next = cur->next;
+	while (cur != NULL) {
+		cur->next = rhead;//让cur指向的节点指向rhead;
+		rhead = cur;//更新新的节点
+		cur->next = NULL;
+
+		cur = next;//cur=cur->next在头插时被改变
+	}
+	return rhead;
+}
+Node* MergeList(Node* head1, Node* head2)
+{
+	Node* c1 = head1;
+	Node* c2 = head2;
+	Node* next1 = c1->next;
+	Node* next2 = c2->next;
+	Node* rhead = NULL;
+	Node* last1 = NULL;
+	Node* Last2 = NULL;
+	if (c1 == NULL) {
+		return c2;
+	}
+	else { return c1; }
+	while (c1 != NULL && c2 != NULL) {
+		if (c1->val < c2->val) {
+			//把c1尾插到rhead中；
+			if (rhead == NULL) {
+				c1->next = rhead;
+				rhead = c1;//等于做了一个头插也可以写成c1=rhead;
+			}
+			else {
+				//先找到最后一个节点，再在最后一个节点上尾插c1;
+				last1->next = c1;
+				c1->next = NULL;
+			}
+			last1 = c1;
+			c1 = next1;
+		}
+		if (c1->val >= c2->val) {
+			//把c2尾插到rhead中；
+			if (rhead == NULL) {
+				c2->next = rhead;
+				rhead = c2;//等于做了一个头插也可以写成c2=rhead;
+			}
+			else {
+				//先找到最后一个节点，再在最后一个节点上尾插c2;
+				last1->next = c2;
+				c2->next = NULL;
+			}
+			last1 = c2;
+			c2 = next1;
+		}
+	}
+	if (c1 != NULL) {
+		//当C2已经为空时，把C1尾插到rhead上
+		Node* getlast=rhead;
+		while (getlast!= NULL)
+		{
+			getlast= getlast->next;
+		}
+		c1 = getlast;
+	}
+	else {
+		Node* getlast = rhead;
+		while (getlast != NULL)
+		{
+			getlast = getlast->next;
+		}
+		c2 = getlast;
+	}
+	return rhead;
+}
+int findmiddle(Node* head) {
+	Node* fast = head;
+	Node* slow = head;
+	while (fast != NULL) {
+		fast = fast->next;
+		slow = slow->next;
+		fast = fast->next;
+	}
+	return slow;
+}
+Node* JudgeHuiWen(Node*head)
+{
+	//找到中间节点，然后1->2->3->2->1
+	//1->2->3  2->1 倒置后链 1->2->3 1->2如果有一个链为空break都相等则为回文
+	Node* list = head;
+	Node* Middle = findmiddle(head);
+	Node* c1 = NULL;
+	Node* c2 = NULL;
+	for (list = head; list = Middle; list = list->next)
+	{
+		//将LIST中到中间点位置头插到从c1中
+		list->next = c1;
+		c1 = list;
+	}
+	for (list = Middle; list != NULL; list = list->next)
+	{
+		Node* last = c2;
+		//将剩余部分尾插到c2中
+		if (c2 == NULL) {
+			list = c2;
+		}
+		else {
+			last->next = c2;
+		}
+	}
+	while (c1 != NULL || c2 != NULL)
+	{
+		if (c1 != c2) {
+			printf("不是回文");
+			break;
+		}
+		else {
+			c1 = c1->next;
+			c2 = c2->next;
+		}
+
+	}
+	printf("是回文");
+	
+}
+
+//寻找两个链表相交的第一个节点
+Node* FindNode(Node* head1, Node* head2) {
+	Node* longer = head1;
+	Node* shorter = head2;
+	int count1 = 0;
+	int count2 = 0;
+	int diffs = 0;
+	while (longer != NULL)
+	{
+		longer = longer->next;
+		count1++;
+	}
+	while (shorter != NULL)
+	{
+		shorter = shorter->next;
+		count2++;
+	}
+	diffs = count1 - count2;
+	if (count1 < count2) {
+		Node* longer = head1;
+		Node* shorter = head2;
+		diffs = count2 - count1;
+	}
+	for(int i=0;i<diffs;i++) {
+		longer = longer->next;
+	}
+	while (longer != NULL) {
+		if (longer == shorter) {
+			break;
+		}
+		longer = longer->next;
+		shorter = shorter->next;
+	}
+	return longer;
+
+}
