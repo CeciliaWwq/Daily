@@ -1,0 +1,10 @@
+﻿  main.cpp
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\util.hpp(42,13): warning C4244:  “参数”: 从“int64_t”转换到“long”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\util.hpp(43,1): warning C4267:  “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\util.hpp(87,1): warning C4267:  “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\util.hpp(130,13): warning C4244:  “参数”: 从“int64_t”转换到“long”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\util.hpp(131,1): warning C4267:  “初始化”: 从“size_t”转换到“int”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\httplib.h(1547,1): warning C4267:  “参数”: 从“size_t”转换到“DWORD”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\client.hpp(213,28): warning C4244:  “=”: 从“int64_t”转换到“int”，可能丢失数据
+E:\cecilia的进阶代码\P2P下载器\P2P下载器\client.hpp(216,42): warning C4244:  “=”: 从“int64_t”转换到“int”，可能丢失数据
+  P2P下载器.vcxproj -> E:\cecilia的进阶代码\P2P下载器\x64\Debug\P2P下载器.exe
